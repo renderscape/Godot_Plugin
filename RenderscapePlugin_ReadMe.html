@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renderscape Plugin Docs — Godot</title>
+<style>
+  /* Tabler Icons — self-hosted subset (26 glyphs actually used on this page).
+     Embedded as base64 so the page has zero external network dependencies. */
+  @font-face {
+    font-family: "tabler-icons";
+    font-style: normal;
+    font-weight: 400;
+    src: url("data:font/woff2;base64,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") format("woff2");
+  }
+  .ti {
+    font-family: "tabler-icons" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .ti-box:before { content: "\ea45"; }
+  .ti-check:before { content: "\ea5e"; }
+  .ti-device-laptop:before { content: "\eb64"; }
+  .ti-download:before { content: "\ea96"; }
+  .ti-folder-plus:before { content: "\eaab"; }
+  .ti-rocket:before { content: "\ec45"; }
+  .ti-layout-grid:before { content: "\edba"; }
+  .ti-lock:before { content: "\eae2"; }
+  .ti-adjustments:before { content: "\ea03"; }
+  .ti-api:before { content: "\effd"; }
+  .ti-help:before { content: "\eabf"; }
+  .ti-search:before { content: "\eb1c"; }
+  .ti-arrows-sort:before { content: "\eb5a"; }
+  .ti-stack-2:before { content: "\eef7"; }
+  .ti-hand-move:before { content: "\ef50"; }
+  .ti-bell:before { content: "\ea35"; }
+  .ti-key:before { content: "\eac7"; }
+  .ti-shield-check:before { content: "\eb22"; }
+  .ti-clock:before { content: "\ea70"; }
+  .ti-folder:before { content: "\eaad"; }
+  .ti-palette:before { content: "\eb01"; }
+  .ti-plug:before { content: "\ebd9"; }
+  .ti-chevron-down:before { content: "\ea5f"; }
+  .ti-copy:before { content: "\ea7a"; }
+  .ti-info-circle:before { content: "\eac5"; }
+  .ti-alert-triangle:before { content: "\ea06"; }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 60%, #1c2130 100%);
+    border-bottom: 1px solid #30363d;
+    padding: 56px 40px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(88,166,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(88,166,255,0.1);
+    border: 1px solid rgba(88,166,255,0.25);
+    color: #58a6ff;
+    font-size: 12px; font-weight: 500;
+    padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 0.03em;
+  }
+  .hero h1 {
+    font-size: 36px; font-weight: 700;
+    background: linear-gradient(135deg, #e6edf3 30%, #58a6ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .hero p { color: #8b949e; font-size: 16px; max-width: 540px; margin: 0 auto 28px; }
+  .hero-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #161b22; border: 1px solid #30363d;
+    color: #8b949e; font-size: 12px;
+    padding: 5px 10px; border-radius: 6px;
+  }
+  .chip i { color: #3fb950; font-size: 13px; }
+
+  .layout { display: flex; max-width: 1100px; margin: 0 auto; }
+
+  .sidebar {
+    width: 230px; flex-shrink: 0;
+    padding: 32px 0 32px 24px;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  .sidebar-section { margin-bottom: 24px; }
+  .sidebar-label {
+    font-size: 11px; font-weight: 600;
+    color: #8b949e; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0 8px; margin-bottom: 4px;
+  }
+  .sidebar a {
+    display: flex; align-items: center; gap: 7px;
+    padding: 5px 8px; border-radius: 6px;
+    color: #8b949e; font-size: 13px;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .sidebar a:hover { background: #161b22; color: #e6edf3; }
+  .sidebar a i { font-size: 14px; }
+
+  .content { flex: 1; min-width: 0; padding: 40px 40px 80px; border-left: 1px solid #21262d; }
+
+  .section { margin-bottom: 52px; scroll-margin-top: 24px; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid #21262d;
+  }
+  .section-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .icon-blue   { background: rgba(88,166,255,0.12);  color: #58a6ff; }
+  .icon-green  { background: rgba(63,185,80,0.12);   color: #3fb950; }
+  .icon-orange { background: rgba(210,153,34,0.12);  color: #d2991a; }
+  .icon-purple { background: rgba(188,140,255,0.12); color: #bc8cff; }
+  .icon-teal   { background: rgba(56,189,248,0.12);  color: #38bdf8; }
+
+  .section-title { font-size: 20px; font-weight: 600; color: #e6edf3; }
+  .platform-tag {
+    font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .tag-recommended { background: rgba(63,185,80,0.12); color: #3fb950; border: 1px solid rgba(63,185,80,0.25); }
+
+  .steps { display: flex; flex-direction: column; gap: 16px; }
+  .step {
+    display: flex; gap: 14px;
+    background: #161b22; border: 1px solid #21262d;
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(88,166,255,0.12);
+    border: 1px solid rgba(88,166,255,0.25);
+    color: #58a6ff; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-body { flex: 1; min-width: 0; }
+  .step h4 { font-size: 14px; font-weight: 600; color: #e6edf3; margin-bottom: 4px; }
+  .step p  { font-size: 13px; color: #8b949e; margin-bottom: 10px; }
+  .step p:last-child { margin-bottom: 0; }
+  .step ul { margin: 6px 0 0 16px; }
+  .step ul li { font-size: 13px; color: #8b949e; margin-bottom: 3px; }
+
+  .code-block {
+    background: #0d1117; border: 1px solid #30363d;
+    border-radius: 8px; overflow: hidden; margin: 8px 0 0;
+  }
+  .code-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 14px; background: #161b22; border-bottom: 1px solid #21262d;
+  }
+  .code-lang { font-size: 11px; color: #8b949e; font-family: monospace; }
+  .copy-btn {
+    display: flex; align-items: center; gap: 4px;
+    background: none; border: none; cursor: pointer;
+    color: #8b949e; font-size: 11px; padding: 2px 6px;
+    border-radius: 4px; transition: color 0.15s, background 0.15s;
+  }
+  .copy-btn:hover { color: #e6edf3; background: #21262d; }
+  .copy-btn i { font-size: 13px; }
+  pre {
+    padding: 16px; overflow-x: auto;
+    font-size: 13px; line-height: 1.6;
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  }
+  code { color: #e6edf3; }
+  .kw   { color: #ff7b72; }
+  .str  { color: #a5d6ff; }
+  .cm   { color: #8b949e; font-style: italic; }
+  .fn   { color: #d2a8ff; }
+  .flag { color: #3fb950; }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .feature-card { background: #161b22; border: 1px solid #21262d; border-radius: 10px; padding: 14px 16px; }
+  .feature-card i  { font-size: 20px; margin-bottom: 8px; display: block; color: #58a6ff; }
+  .feature-card h4 { font-size: 13px; font-weight: 600; color: #e6edf3; margin-bottom: 3px; }
+  .feature-card p  { font-size: 12px; color: #8b949e; line-height: 1.5; }
+
+  .tree {
+    background: #0d1117; border: 1px solid #30363d;
+    border-radius: 8px; padding: 16px;
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px; line-height: 1.9; color: #8b949e;
+    white-space: pre; overflow-x: auto;
+  }
+  .tree .dir  { color: #79c0ff; }
+  .tree .file { color: #e6edf3; }
+
+  .callout {
+    display: flex; gap: 12px;
+    padding: 14px 16px; border-radius: 8px;
+    margin: 12px 0; font-size: 13px;
+  }
+  .callout-info  { background: rgba(88,166,255,0.08);  border: 1px solid rgba(88,166,255,0.2);  color: #79c0ff; }
+  .callout-warn  { background: rgba(210,153,34,0.08);  border: 1px solid rgba(210,153,34,0.2);  color: #d2991a; }
+  .callout-green { background: rgba(63,185,80,0.08);   border: 1px solid rgba(63,185,80,0.2);   color: #3fb950; }
+  .callout i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { color: #c9d1d9; }
+  .callout-body strong { color: #e6edf3; font-weight: 600; }
+
+  .endpoint-list { display: flex; flex-direction: column; gap: 8px; }
+  .endpoint {
+    display: flex; align-items: center; gap: 12px;
+    background: #161b22; border: 1px solid #21262d;
+    border-radius: 8px; padding: 12px 14px;
+  }
+  .method-badge {
+    background: rgba(63,185,80,0.15); border: 1px solid rgba(63,185,80,0.25);
+    color: #3fb950; font-size: 10px; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px; letter-spacing: 0.05em; flex-shrink: 0;
+  }
+  .endpoint-info { flex: 1; min-width: 0; }
+  .endpoint-label { font-size: 12px; color: #8b949e; margin-bottom: 2px; }
+  .endpoint-url   { font-family: monospace; font-size: 12px; color: #79c0ff; word-break: break-all; }
+
+  .trouble-list { display: flex; flex-direction: column; gap: 8px; }
+  .trouble-item { background: #161b22; border: 1px solid #21262d; border-radius: 8px; overflow: hidden; }
+  .trouble-q {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; cursor: pointer;
+    color: #e6edf3; font-size: 14px; font-weight: 500; gap: 8px;
+  }
+  .trouble-q:hover { background: #1c2130; }
+  .trouble-q i.toggle { font-size: 14px; color: #8b949e; transition: transform 0.2s; flex-shrink: 0; }
+  .trouble-a {
+    display: none; padding: 12px 16px 14px;
+    font-size: 13px; color: #8b949e;
+    border-top: 1px solid #21262d;
+  }
+  .trouble-item.open .trouble-a { display: block; }
+  .trouble-item.open .toggle    { transform: rotate(180deg); }
+
+  .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .sec-card { background: #161b22; border: 1px solid #21262d; border-radius: 10px; padding: 14px 16px; }
+  .sec-card h4 { font-size: 13px; font-weight: 600; color: #e6edf3; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .sec-card h4 i { font-size: 15px; }
+  .sec-card p  { font-size: 12px; color: #8b949e; line-height: 1.5; }
+
+  .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .req-card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 12px 14px; }
+  .req-card .os     { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .req-card .tool   { font-size: 13px; font-weight: 600; color: #e6edf3; }
+  .req-card .detail { font-size: 12px; color: #8b949e; margin-top: 2px; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+    .content { padding: 24px 20px; }
+    .hero    { padding: 40px 20px 32px; }
+    .hero h1 { font-size: 26px; }
+    .security-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge"><i class="ti ti-box"></i> Godot Plugin</div>
+  <h1>Renderscape Asset Browser</h1>
+  <p>Browse, preview, and import 3D assets from Renderscape directly into your Godot project.</p>
+  <div class="hero-chips">
+    <span class="chip"><i class="ti ti-check"></i> Native Godot UI</span>
+    <span class="chip"><i class="ti ti-check"></i> Auto-login</span>
+    <span class="chip"><i class="ti ti-check"></i> Thumbnail previews</span>
+    <span class="chip"><i class="ti ti-check"></i> Drag &amp; drop</span>
+    <span class="chip"><i class="ti ti-check"></i> Category filters</span>
+    <span class="chip"><i class="ti ti-check"></i> Grid &amp; list view</span>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Get Started</div>
+      <a href="#requirements"><i class="ti ti-device-laptop"></i> Requirements</a>
+      <a href="#install-assetlib"><i class="ti ti-download"></i> Install (Asset Library)</a>
+      <a href="#install-manual"><i class="ti ti-folder-plus"></i> Install (Manual)</a>
+      <a href="#getting-started"><i class="ti ti-rocket"></i> Getting started</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Using the Plugin</div>
+      <a href="#features"><i class="ti ti-layout-grid"></i> Features</a>
+      <a href="#security"><i class="ti ti-lock"></i> Security</a>
+      <a href="#customizing"><i class="ti ti-adjustments"></i> Customizing</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="#endpoints"><i class="ti ti-api"></i> API endpoints</a>
+      <a href="#troubleshooting"><i class="ti ti-help"></i> Troubleshooting</a>
+    </div>
+  </nav>
+
+  <main class="content">
+
+    <!-- Requirements -->
+    <section class="section" id="requirements">
+      <div class="section-header">
+        <div class="section-icon icon-blue"><i class="ti ti-device-laptop"></i></div>
+        <h2 class="section-title">Requirements</h2>
+      </div>
+      <div class="req-grid">
+        <div class="req-card">
+          <div class="os">Engine</div>
+          <div class="tool">Godot 4.x</div>
+          <div class="detail">Tested on 4.2+</div>
+        </div>
+        <div class="req-card">
+          <div class="os">Account</div>
+          <div class="tool">Renderscape.io login</div>
+          <div class="detail">At least one purchased asset</div>
+        </div>
+      </div>
+      <div class="callout callout-green" style="margin-top:16px">
+        <i class="ti ti-plug"></i>
+        <div class="callout-body">This plugin is pure <strong>GDScript</strong> — unlike the Unreal version, there's nothing to compile. No Visual Studio, no build step, no C++ toolchain. Install the folder, enable it, done.</div>
+      </div>
+    </section>
+
+    <!-- Install via Asset Library -->
+    <section class="section" id="install-assetlib">
+      <div class="section-header">
+        <div class="section-icon icon-green"><i class="ti ti-download"></i></div>
+        <h2 class="section-title">Install — Asset Library <span class="platform-tag tag-recommended">Recommended</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Open the AssetLib tab</h4>
+            <p>In the Godot editor, click the <strong style="color:#e6edf3">AssetLib</strong> tab along the top of the window (next to 2D, 3D, and Script).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Search and download</h4>
+            <p>Search for <strong style="color:#e6edf3">Renderscape</strong>, click into the listing, then click <strong style="color:#e6edf3">Download</strong> followed by <strong style="color:#e6edf3">Install</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Enable the plugin</h4>
+            <p>Go to <strong style="color:#e6edf3">Project → Project Settings → Plugins</strong> and toggle <strong style="color:#e6edf3">Renderscape</strong> on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Manual install -->
+    <section class="section" id="install-manual">
+      <div class="section-header">
+        <div class="section-icon icon-blue"><i class="ti ti-folder-plus"></i></div>
+        <h2 class="section-title">Install — Manual</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Download or clone the repository</h4>
+            <p>Grab the latest release, or clone the repo directly.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Copy the plugin folder into your project</h4>
+            <p>Copy <code style="color:#79c0ff;font-size:12px">addons/renderscape/</code> into your project's own <code style="color:#79c0ff;font-size:12px">addons/</code> directory, so it looks like this:</p>
+            <div class="tree">your_project/
+├── addons/
+│   └── <span class="dir">renderscape/</span>
+│       ├── <span class="file">plugin.cfg</span>
+│       ├── <span class="file">renderscape_node.gd</span>
+│       ├── <span class="file">renderscape_panel.gd</span>
+│       └── <span class="file">...</span>
+└── project.godot</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Enable the plugin</h4>
+            <p>Go to <strong style="color:#e6edf3">Project → Project Settings → Plugins</strong> and toggle <strong style="color:#e6edf3">Renderscape</strong> on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting started -->
+    <section class="section" id="getting-started">
+      <div class="section-header">
+        <div class="section-icon icon-purple"><i class="ti ti-rocket"></i></div>
+        <h2 class="section-title">Getting started</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Open the Renderscape dock</h4>
+            <p>It docks to the left side of the editor by default, alongside FileSystem and Scene.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Log in</h4>
+            <p>Enter your Renderscape.io email and password. Credentials are encrypted locally, so you won't need to log in again next session.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Pull in your assets</h4>
+            <p>Click <strong style="color:#e6edf3">Get My Assets</strong> to load everything you've purchased into the panel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <div class="section-icon icon-teal"><i class="ti ti-layout-grid"></i></div>
+        <h2 class="section-title">Features</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="ti ti-search"></i>
+          <h4>Search &amp; filter</h4>
+          <p>Free-text search plus category chips to narrow your library fast.</p>
+        </div>
+        <div class="feature-card">
+          <i class="ti ti-arrows-sort"></i>
+          <h4>Sort &amp; view</h4>
+          <p>Newest-first or A→Z, and toggle between list and grid layouts.</p>
+        </div>
+        <div class="feature-card">
+          <i class="ti ti-stack-2"></i>
+          <h4>Quality tiers</h4>
+          <p>Production, Medium, or Low Poly — each tier downloads and caches separately.</p>
+        </div>
+        <div class="feature-card">
+          <i class="ti ti-hand-move"></i>
+          <h4>Drag &amp; drop</h4>
+          <p>Drag a downloaded asset straight from the panel into your 2D/3D viewport.</p>
+        </div>
+        <div class="feature-card">
+          <i class="ti ti-bell"></i>
+          <h4>New asset alerts</h4>
+          <p>The panel checks for new purchases automatically and flags them.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security -->
+    <section class="section" id="security">
+      <div class="section-header">
+        <div class="section-icon icon-green"><i class="ti ti-lock"></i></div>
+        <h2 class="section-title">Security</h2>
+      </div>
+      <div class="security-grid">
+        <div class="sec-card">
+          <h4><i class="ti ti-key" style="color:#3fb950"></i> Local credential storage</h4>
+          <p>Saved email/password are encrypted with AES-256-CBC before being written to disk, using a key derived from your project identity. This isn't OS-keychain-grade security, but it stops the file from being plaintext-readable.</p>
+        </div>
+        <div class="sec-card">
+          <h4><i class="ti ti-shield-check" style="color:#3fb950"></i> Session tokens</h4>
+          <p>Your auth token is kept in memory only for the duration of the editor session — it's never written to disk.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customizing -->
+    <section class="section" id="customizing">
+      <div class="section-header">
+        <div class="section-icon icon-purple"><i class="ti ti-adjustments"></i></div>
+        <h2 class="section-title">Customizing</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:rgba(188,140,255,0.12);border-color:rgba(188,140,255,0.25);color:#bc8cff"><i class="ti ti-clock" style="font-size:12px"></i></div>
+          <div class="step-body">
+            <h4>Refresh interval</h4>
+            <p>In <code style="color:#79c0ff;font-size:12px">renderscape_panel.gd</code>, on the <code style="color:#79c0ff;font-size:12px">refresh_timer</code>:</p>
+            <div class="code-block"><div class="code-header"><span class="code-lang">gdscript</span><button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> copy</button></div>
+            <pre><code><span class="cm"># Change 120.0 to any interval in seconds</span>
+refresh_timer.wait_time = <span class="str">120.0</span> <span class="cm"># 2 minutes</span></code></pre></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(188,140,255,0.12);border-color:rgba(188,140,255,0.25);color:#bc8cff"><i class="ti ti-folder" style="font-size:12px"></i></div>
+          <div class="step-body">
+            <h4>Download directory</h4>
+            <p>In <code style="color:#79c0ff;font-size:12px">renderscape_panel.gd</code>:</p>
+            <div class="code-block"><div class="code-header"><span class="code-lang">gdscript</span><button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> copy</button></div>
+            <pre><code><span class="kw">const</span> ASSET_DIR := <span class="str">"res://renderscape_assets"</span></code></pre></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(188,140,255,0.12);border-color:rgba(188,140,255,0.25);color:#bc8cff"><i class="ti ti-palette" style="font-size:12px"></i></div>
+          <div class="step-body">
+            <h4>UI colors</h4>
+            <p>In <code style="color:#79c0ff;font-size:12px">renderscape_style.gd</code>:</p>
+            <div class="code-block"><div class="code-header"><span class="code-lang">gdscript</span><button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> copy</button></div>
+            <pre><code><span class="cm"># Title color</span>
+<span class="kw">const</span> TITLE_COLOR := Color(<span class="str">0.5, 0.8, 1.0, 1.0</span>)
+<span class="cm"># New asset badge + active category chip</span>
+<span class="kw">const</span> ACCENT_COLOR := Color(<span class="str">0.15, 0.35, 0.75, 1.0</span>)</code></pre></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Endpoints -->
+    <section class="section" id="endpoints">
+      <div class="section-header">
+        <div class="section-icon icon-teal"><i class="ti ti-api"></i></div>
+        <h2 class="section-title">API endpoints</h2>
+      </div>
+      <div class="endpoint-list">
+        <div class="endpoint">
+          <span class="method-badge">POST</span>
+          <div class="endpoint-info">
+            <div class="endpoint-label">Login</div>
+            <div class="endpoint-url">https://renderscape.io/server/plugins/godot/godot_login.php</div>
+          </div>
+        </div>
+        <div class="endpoint">
+          <span class="method-badge">POST</span>
+          <div class="endpoint-info">
+            <div class="endpoint-label">Asset list</div>
+            <div class="endpoint-url">https://renderscape.io/server/plugins/godot/godot_user_downloads.php</div>
+          </div>
+        </div>
+        <div class="endpoint">
+          <span class="method-badge">POST</span>
+          <div class="endpoint-info">
+            <div class="endpoint-label">Download asset</div>
+            <div class="endpoint-url">https://renderscape.io/server/plugins/godot/serve_asset.php</div>
+          </div>
+        </div>
+        <div class="endpoint">
+          <span class="method-badge" style="background:rgba(88,166,255,0.12);border-color:rgba(88,166,255,0.25);color:#58a6ff">GET</span>
+          <div class="endpoint-info">
+            <div class="endpoint-label">Thumbnails</div>
+            <div class="endpoint-url">https://renderscape.io/miner/thumbnails/dark/{category}-{filename}.png</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section class="section" id="troubleshooting">
+      <div class="section-header">
+        <div class="section-icon icon-orange"><i class="ti ti-help"></i></div>
+        <h2 class="section-title">Troubleshooting</h2>
+      </div>
+      <div class="trouble-list">
+
+        <div class="trouble-item" onclick="toggleTrouble(this)">
+          <div class="trouble-q"><span>Plugin doesn't appear in Project Settings → Plugins</span><i class="ti ti-chevron-down toggle"></i></div>
+          <div class="trouble-a">Check that <code style="color:#79c0ff;font-size:12px">plugin.cfg</code> is directly inside <code style="color:#79c0ff;font-size:12px">addons/renderscape/</code> and not in a subdirectory. Restart the editor after fixing the path.</div>
+        </div>
+
+        <div class="trouble-item" onclick="toggleTrouble(this)">
+          <div class="trouble-q"><span>Login fails</span><i class="ti ti-chevron-down toggle"></i></div>
+          <div class="trouble-a">Open the <strong style="color:#e6edf3">Output</strong> panel and look for HTTP errors. Verify your credentials are correct on renderscape.io, and check your internet connection. If saved credentials seem stuck, log out and log back in to overwrite them.</div>
+        </div>
+
+        <div class="trouble-item" onclick="toggleTrouble(this)">
+          <div class="trouble-q"><span>Download fails</span><i class="ti ti-chevron-down toggle"></i></div>
+          <div class="trouble-a">Confirm the asset actually shows as purchased on your renderscape.io account page. If it does and the download still fails, check the Output panel for the response code and try again in a minute — the request may have timed out.</div>
+        </div>
+
+        <div class="trouble-item" onclick="toggleTrouble(this)">
+          <div class="trouble-q"><span>Thumbnails don't load</span><i class="ti ti-chevron-down toggle"></i></div>
+          <div class="trouble-a">Non-critical — asset names and all other functionality still work correctly. Thumbnails load asynchronously after the asset list. Check your internet connection if they never appear.</div>
+        </div>
+
+        <div class="trouble-item" onclick="toggleTrouble(this)">
+          <div class="trouble-q"><span>Asset downloads but won't import, or looks wrong</span><i class="ti ti-chevron-down toggle"></i></div>
+          <div class="trouble-a">Godot 4 doesn't natively support Draco-compressed <code style="color:#79c0ff;font-size:12px">.glb</code> files. Assets served through this plugin are delivered uncompressed specifically for engine compatibility, so this is rare — but if it happens, make sure you're on the latest version of the plugin and try re-downloading the asset.</div>
+        </div>
+
+        <div class="trouble-item" onclick="toggleTrouble(this)">
+          <div class="trouble-q"><span>Drag-and-drop doesn't place the asset</span><i class="ti ti-chevron-down toggle"></i></div>
+          <div class="trouble-a">Make sure the asset has finished downloading first — look for the <code style="color:#79c0ff;font-size:12px">[⬇ downloading]</code> tag next to it in the list. Once it disappears, dragging from the panel into the viewport will work.</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.innerHTML = '<i class="ti ti-check"></i> copied';
+    btn.style.color = '#3fb950';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="ti ti-copy"></i> copy';
+      btn.style.color = '';
+    }, 2000);
+  });
+}
+function toggleTrouble(el) {
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
